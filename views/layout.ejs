@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+    <%- style %>
+    <link rel="stylesheet" href="/css/layout.css">
+</head>
+<body>
+    <!-- Naam mai hi to sab Kuch rakha hai naam se hi ye render ho rha h -->
+    <%- include('_header') %>
+    <!-- <h1>Codeial / <%=title%></h1> -->
+    <%- body %>
+    <%- include('_footer')%>
+</body>
+<%- script %>
+</html>
+
