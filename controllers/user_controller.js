@@ -2,8 +2,7 @@ const User = require('../models/user')
 
 module.exports.profile = function (req,res) {
     // res.send('<h1>User Controller Here</h1>')
-    if(req.cookies.user_id){
-        User.findById(req.cookies.user_id).then(user=>{
+        User.findById(req.user.id).then(user=>{
             if(user){
                 return res.render('user_profile',{
                     title: 'User Profile',
@@ -14,10 +13,6 @@ module.exports.profile = function (req,res) {
                 return res.redirect('sign-in');
             }
         })
-    }
-    else{
-        return res.render('sign-in');
-    }
 }
 
 module.exports.userSignUp = function(req,res){

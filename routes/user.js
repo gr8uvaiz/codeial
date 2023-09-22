@@ -1,9 +1,10 @@
 const express = require('express')
 const userController = require('../controllers/user_controller');
-const passport = require('../config/passport-local-startegy')
+const passport = require('passport')
+const passportLocal = require('../config/passport-local-startegy')
 const router = express.Router();
 
-router.get('/profile', passport.checkAuthentication ,userController.profile);
+router.get('/profile',passportLocal.checkAuthentication,userController.profile);
 router.get('/sign-up',userController.userSignUp);
 router.get('/sign-in',userController.userSignIn);
 router.post('/create',userController.create);

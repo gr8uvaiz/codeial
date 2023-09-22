@@ -48,7 +48,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(passport.setAuthenticationUser);
+app.use(passportLocal.setAuthenticationUser); 
 
 app.use('/',router);
 

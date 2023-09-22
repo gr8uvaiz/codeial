@@ -39,7 +39,7 @@ passport.setAuthenticationUser = function(req,res,next){
 // serializing the user to put the data into the cookies
 
 passport.serializeUser(function(user,done){
-    return done(null,user.id)
+    return done(null,user.id);
 })
 
 // deserializing the user to get the data from the cookies
