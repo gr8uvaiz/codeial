@@ -5,5 +5,7 @@ const home_controller = require('../controllers/home_controller')
 console.log("Router Loaded")
 
 router.get('/',home_controller.home)
-router.use('/',require('./user'));
+router.use('/users',require('./user'));
+router.use('/posts',require('./post'));
+router.use('/comments',require('./comment'));
 module.exports = router;
