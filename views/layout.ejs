@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%=title%></title>
     <%- style %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
     <link rel="stylesheet" href="/css/layout.css">
 </head>
 <body>
@@ -12,8 +14,22 @@
     <%- include('_header') %>
     <!-- <h1>Codeial / <%=title%></h1> -->
     <%- body %>
-    <%- include('_footer')%>
+    <%- include('_footer')%> 
 </body>
-<%- script %>
+
+    <%- script %>
+    <%if(flash.success && flash.success.length>0 ){%>
+        <script>    // Create a new Noty notification
+        new Noty({
+            theme: 'relax',
+            type: 'success', 
+            layout: 'topRight',
+            text: '<%= flash.success%>',
+            timeout: 1500
+        }).show(); 
+
+        </script>
+    <%}%>
+
 </html>
 

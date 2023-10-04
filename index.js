@@ -1,7 +1,7 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const app = express();
-const port = 8000;
+const port = 3000;
 const router = require('./routes');
 const db = require('./config/mongoose')
 const cookieParser = require('cookie-parser')
@@ -9,6 +9,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-startegy');
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
+const customMware = require('./config/middleware')
 
 app.use(express.static('./assets'));
 app.use(cookieParser());
@@ -47,9 +49,10 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(passportLocal.setAuthenticationUser); 
 
+app.use(flash());
+app.use(customMware.setFlash);
 app.use('/',router);
 
 app.listen(port,(err)=>{

@@ -29,7 +29,7 @@ header a{
     color: white;
 }
 #posts-container{
-    height: 500px;
+    height: 100%;
     /* background-color: yellow; */
 }
 

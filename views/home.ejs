@@ -1,56 +1,29 @@
-<h1>Codeial / <%=title%></h1>
+<link rel="stylesheet" href="/css/home.css">
+<div id="home-container">
 
-<section id="posts-container">
-    <h4>Post</h4>
-    <%if(locals.user){%>  <!-- because we are setting locals req.locals.user = req.user in passport config -->
-    <form action="/posts/create" method="post">
-        <textarea name="content" placeholder="What's in Your Mind ?" cols="30" rows="4" required></textarea>
-        <input type="submit" value="Post">
-    </form>
-    <%}%>
-
-    <div id="post-lists">
-        <%for(post of posts){%>
-            <ul>
-
-                <li>
-                    <p>
-                        <%= post.content%> <br>
-                        <small>
-                            <%= post.user.name %>
-                        </small>
-                    </p>
-
-                    <%if(locals.user){%>
-                    <div id="comment-container">
-                        <form action="/comments/create" method="post">
-                            <input type="text" name="content" placeholder="Type Comment.." required>
-                            <input type="hidden" name="post" value="<%=post._id%>">    
-                            <input type="submit" value="Comment">
-                        </form>
-                    </div>
+    <section id="posts-container">
+        <h4>Posts</h4>
+        <%if(locals.user){%> <!-- because we are setting locals req.locals.user = req.user in passport config -->
+            <form action="/posts/create" method="post">
+                <textarea name="content" placeholder="What's in Your Mind ?" cols="30" rows="4" required></textarea>
+                <input type="submit" value="Post">
+            </form>
+            <%}%>
+            
+            <div id="post-lists">
+                <%for(post of posts){%>
+                    <%-include('_post')-%>
                     <%}%>
-
-                    <div class="comments-list">
-                        <ul id="post-comments-<%=post._id%>">
-                            
-                                <%for(comment of post.comment){%>
-                                    <li>
-                                <%= comment.content %>
-                                <br>
-                                <small>
-                                    <%= comment.user.name %>
-                                </small>
-                                <%}%>
-                            </li>
-                           
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-          
-        <%}%>
-    </div>
+            </div>
+        </section>
+        
+        
+        <section id="users-friends">
+            <h4>Friends</h4>
+            <%for(u of all_users){%>
+                <p>
+                    <a href="/users/profile/<%=u.id%>"><%=u.name%></a>
+                </p>
+    <%}%>
 </section>
-
-
+</div>

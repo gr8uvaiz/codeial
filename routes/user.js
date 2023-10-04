@@ -4,7 +4,8 @@ const passport = require('passport')
 const passportLocal = require('../config/passport-local-startegy')
 const router = express.Router();
 
-router.get('/profile',passportLocal.checkAuthentication,userController.profile);
+router.get('/profile/:id',passportLocal.checkAuthentication,userController.profile);
+router.post('/update/:id',passportLocal.checkAuthentication,userController.update);
 router.get('/sign-up',userController.userSignUp);
 router.get('/sign-in',userController.userSignIn);
 router.post('/create',userController.create);

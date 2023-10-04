@@ -1,8 +1,10 @@
-const Post = require("../models/post")
+const Post = require("../models/post");
+const User = require('../models/user');
 
-module.exports.home = function(req,res){
+module.exports.home = async function(req,res){
     // res.send(`<h1>Hello this is loaded from the controller</h1>`)
-    Post.find({})
+    try{
+        const posts = await Post.find({})
     .populate('user')
     .populate({
         path: 'comment',
@@ -10,11 +12,17 @@ module.exports.home = function(req,res){
             path: 'user',
         }
     })
-    .exec()
-    .then(data=>{
-        return res.render('home',{
-            title: 'Home',
-            posts: data
-        })
+
+    const user = await User.find({});
+
+    return res.render('home',{
+        title: 'Home',
+        posts: posts,
+        all_users: user,
     })
+
+    }catch(err){
+        console.log(err+" Error in home controller")
+    }
+    
 }
