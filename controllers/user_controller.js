@@ -1,5 +1,6 @@
 const User = require('../models/user')
-
+const fs = require('fs');
+const path = require('path');
 module.exports.profile = function (req,res) {
     // res.send('<h1>User Controller Here</h1>')
         User.findById(req.params.id).then(user=>{
@@ -15,11 +16,24 @@ module.exports.profile = function (req,res) {
         })
 }
 
-module.exports.update = function(req,res){
+module.exports.update = async function(req,res){
     if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id , req.body)
-        .then(()=>{
+        const user = await User.findById(req.params.id)
+        User.uploadedAvatar(req,res,function(err){
+
+            if(err) console.log('Error in Multer',err);
+            user.name = req.body.name;
+            user.email = req.body.email;
+            if(req.file){
+
+                if(user.avatar){
+                    fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                }
+                user.avatar = User.avatarPath + '/' + req.file.filename;
+            }
+            user.save();
             res.redirect('back');
+
         })
     }
     else{

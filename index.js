@@ -13,6 +13,7 @@ const flash = require('connect-flash');
 const customMware = require('./config/middleware')
 
 app.use(express.static('./assets'));
+app.use('/uploads',express.static(__dirname+'/uploads'));
 app.use(cookieParser());
 
 // using Middle ware for post request
