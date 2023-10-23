@@ -27,7 +27,17 @@
             text: '<%= flash.success%>',
             timeout: 1500
         }).show(); 
-
+        </script>
+    <%}%>
+    <%if(flash.error && flash.error.length>0 ){%>
+        <script>    // Create a new Noty notification
+        new Noty({
+            theme: 'sunset',
+            type: 'error', 
+            layout: 'topRight',
+            text: '<%= flash.error%>',
+            timeout: 1500
+        }).show(); 
         </script>
     <%}%>
 

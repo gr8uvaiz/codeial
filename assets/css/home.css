@@ -1,7 +1,7 @@
 #home-container{
     display: flex;
     width: 100%;
-    height: 600px;
+    min-height: 600px;
 }
 #posts-container{
     width: 70%;

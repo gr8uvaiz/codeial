@@ -78,6 +78,7 @@ module.exports.create = function(req,res){
           });
       } else {
         // User with the provided email already exists
+        req.flash('error','User Already Exist');
         return res.redirect('back');
       }
     })
